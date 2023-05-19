@@ -1,7 +1,11 @@
 import { usePostsContext } from "../hooks/usePostsContext"
 
+// date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 export default function PostDetails({ post }) {
     const { dispatch } = usePostsContext()
+
     const handleClick = async () => {
         const response = await fetch('/api/posts/' + post._id, {
             method: 'DELETE'
@@ -17,8 +21,8 @@ export default function PostDetails({ post }) {
         <div className="post-details">
             <h4>{post.title}</h4>
             <p>{post.message}</p>
-            <p>{post.createdAt}</p>
-            <span onClick={handleClick}>delete</span>
+            <p>{formatDistanceToNow(new Date(post.createdAt), { addSuffix: true })}</p>
+            <span className="material-symbols-outlined" onClick={handleClick}>delete</span>
         </div>
     )
 }

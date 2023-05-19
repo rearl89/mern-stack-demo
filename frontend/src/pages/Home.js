@@ -17,9 +17,8 @@ export default function Home() {
                 dispatch({type: 'SET_POSTS', payload: json})
             }
         }
-
         fetchPosts()
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="home">
